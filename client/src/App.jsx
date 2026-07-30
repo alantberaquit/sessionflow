@@ -8,6 +8,7 @@ import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import PublicOnlyRoute from "./components/PublicOnlyRoute.jsx";
 import DashboardPage from "./pages/DashboardPage.jsx";
 import EventDetailsPage from "./pages/EventDetailsPage.jsx";
+import EventRegistrationPage from "./pages/EventRegistrationPage.jsx";
 import EventsPage from "./pages/EventsPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
@@ -57,6 +58,11 @@ const App = () => {
         <Route
           path="/profile"
           element={<ProfilePage />}
+        />
+
+        <Route
+          path="/events/:slug/register"
+          element={<EventRegistrationPage />}
         />
       </Route>
 

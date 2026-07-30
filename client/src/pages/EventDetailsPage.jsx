@@ -1,18 +1,21 @@
 import {
   AlertCircle,
   ArrowLeft,
+  ArrowRight,
   BriefcaseBusiness,
   Building2,
   CalendarDays,
   CheckCircle2,
   Clock3,
   LoaderCircle,
+  LogIn,
   MapPin,
   Mic2,
   Presentation,
   UsersRound,
 } from "lucide-react";
 import {
+  useCallback,
   useEffect,
   useState,
 } from "react";
@@ -20,6 +23,8 @@ import {
   Link,
   useParams,
 } from "react-router";
+
+import useAuth from "../hooks/useAuth.js";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -92,6 +97,11 @@ const getRegistrationDetails = (
 const EventDetailsPage = () => {
   const { slug } = useParams();
 
+  const {
+    token,
+    endSession,
+  } = useAuth();
+
   const [event, setEvent] = useState(null);
   const [isLoading, setIsLoading] =
     useState(true);
@@ -99,6 +109,17 @@ const EventDetailsPage = () => {
     useState("");
   const [isNotFound, setIsNotFound] =
     useState(false);
+  const [hasRegistration, setHasRegistration] =
+    useState(false);
+  const [
+    isLoadingRegistration,
+    setIsLoadingRegistration,
+  ] = useState(false);
+
+  const handleInvalidSession = useCallback(() => {
+    endSession();
+    setHasRegistration(false);
+  }, [endSession]);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -172,6 +193,90 @@ const EventDetailsPage = () => {
       abortController.abort();
     };
   }, [slug]);
+
+  useEffect(() => {
+    const abortController = new AbortController();
+
+    const loadParticipantRegistration =
+      async () => {
+        if (!API_URL || !token || !slug) {
+          setHasRegistration(false);
+          setIsLoadingRegistration(false);
+
+          return;
+        }
+
+        setIsLoadingRegistration(true);
+
+        try {
+          const response = await fetch(
+            `${API_URL}/api/events/${encodeURIComponent(
+              slug,
+            )}/registration`,
+            {
+              method: "GET",
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+              signal: abortController.signal,
+            },
+          );
+
+          const responseData =
+            await response.json();
+
+          if (response.status === 401) {
+            if (!abortController.signal.aborted) {
+              handleInvalidSession();
+            }
+
+            return;
+          }
+
+          if (!response.ok) {
+            throw new Error(
+              responseData.message ||
+                "Unable to retrieve your registration.",
+            );
+          }
+
+          if (abortController.signal.aborted) {
+            return;
+          }
+
+          setHasRegistration(
+            Boolean(
+              responseData.hasRegistration,
+            ),
+          );
+        } catch (error) {
+          if (error.name === "AbortError") {
+            return;
+          }
+
+          console.error(
+            "Unable to check participant registration:",
+          );
+          console.error(error.message);
+
+          setHasRegistration(false);
+        } finally {
+          if (!abortController.signal.aborted) {
+            setIsLoadingRegistration(false);
+          }
+        }
+      };
+
+    loadParticipantRegistration();
+
+    return () => {
+      abortController.abort();
+    };
+  }, [
+    handleInvalidSession,
+    slug,
+    token,
+  ]);
 
   if (isLoading) {
     return (
@@ -751,6 +856,70 @@ const EventDetailsPage = () => {
                   </dd>
                 </div>
               </dl>
+
+              {event.registrationState === "open" &&
+                isLoadingRegistration && (
+                  <div
+                    className="mt-6 flex min-h-12 items-center justify-center gap-2 rounded-xl bg-slate-100 px-4 py-3 text-sm font-semibold text-slate-600"
+                    role="status"
+                  >
+                    <LoaderCircle
+                      className="h-5 w-5 animate-spin text-blue-600"
+                      aria-hidden="true"
+                    />
+
+                    Checking registration...
+                  </div>
+                )}
+
+              {event.registrationState === "open" &&
+                !isLoadingRegistration &&
+                !token && (
+                  <Link
+                    className="mt-6 flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 font-bold text-white shadow-lg shadow-blue-600/20 transition hover:-translate-y-0.5 hover:bg-blue-700 focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-blue-300"
+                    to="/login"
+                    state={{
+                      from: `/events/${event.slug}/register`,
+                    }}
+                  >
+                    <LogIn
+                      className="h-5 w-5"
+                      aria-hidden="true"
+                    />
+
+                    Sign in to register
+                  </Link>
+                )}
+
+              {event.registrationState === "open" &&
+                !isLoadingRegistration &&
+                token && (
+                  <Link
+                    className="mt-6 flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 font-bold text-white shadow-lg shadow-blue-600/20 transition hover:-translate-y-0.5 hover:bg-blue-700 focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-blue-300"
+                    to={`/events/${event.slug}/register`}
+                  >
+                    {hasRegistration
+                      ? "Continue registration"
+                      : "Start registration"}
+
+                    <ArrowRight
+                      className="h-5 w-5"
+                      aria-hidden="true"
+                    />
+                  </Link>
+                )}
+
+              {event.registrationState !== "open" && (
+                <div className="mt-6 rounded-xl border border-slate-200 bg-slate-100 px-4 py-3 text-center text-sm font-semibold text-slate-600">
+                  {event.registrationState ===
+                  "upcoming"
+                    ? `Registration opens ${formatDate(
+                        event.registrationPeriod
+                          .opensAt,
+                      )}.`
+                    : "Registration is currently unavailable."}
+                </div>
+              )}
             </section>
 
             <section className="rounded-3xl border border-blue-200 bg-blue-50 p-6">
