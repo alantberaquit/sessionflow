@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 
 import User from "../models/User.js";
+import generateToken from "../utils/generateToken.js";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const SALT_ROUNDS = 12;
@@ -43,9 +44,11 @@ export const registerUser = async (request, response) => {
     if (typeof password !== "string" || !password) {
       errors.password = "Password is required";
     } else if (password.length < 8) {
-      errors.password = "Password must contain at least 8 characters";
+      errors.password =
+        "Password must contain at least 8 characters";
     } else if (password.length > 72) {
-      errors.password = "Password cannot exceed 72 characters";
+      errors.password =
+        "Password cannot exceed 72 characters";
     }
 
     if (
@@ -74,7 +77,8 @@ export const registerUser = async (request, response) => {
 
     if (existingUser) {
       return response.status(409).json({
-        message: "An account with this email already exists",
+        message:
+          "An account with this email already exists",
       });
     }
 
@@ -91,7 +95,8 @@ export const registerUser = async (request, response) => {
     });
 
     return response.status(201).json({
-      message: "Participant account created successfully",
+      message:
+        "Participant account created successfully",
       user: {
         id: user._id,
         name: user.name,
@@ -102,15 +107,114 @@ export const registerUser = async (request, response) => {
   } catch (error) {
     if (error?.code === 11000) {
       return response.status(409).json({
-        message: "An account with this email already exists",
+        message:
+          "An account with this email already exists",
       });
     }
 
-    console.error("Unable to create participant account:");
+    console.error(
+      "Unable to create participant account:",
+    );
     console.error(error.message);
 
     return response.status(500).json({
-      message: "Unable to create participant account",
+      message:
+        "Unable to create participant account",
     });
   }
+};
+
+export const loginUser = async (request, response) => {
+  try {
+    const {
+      email,
+      password,
+    } = request.body ?? {};
+
+    const normalizedEmail =
+      typeof email === "string"
+        ? email.trim().toLowerCase()
+        : "";
+
+    const errors = {};
+
+    if (!normalizedEmail) {
+      errors.email = "Email is required";
+    } else if (normalizedEmail.length > 254) {
+      errors.email =
+        "Email cannot exceed 254 characters";
+    } else if (!EMAIL_PATTERN.test(normalizedEmail)) {
+      errors.email =
+        "Please provide a valid email address";
+    }
+
+    if (typeof password !== "string" || !password) {
+      errors.password = "Password is required";
+    } else if (password.length > 72) {
+      errors.password =
+        "Password cannot exceed 72 characters";
+    }
+
+    if (Object.keys(errors).length > 0) {
+      return response.status(400).json({
+        message: "Validation failed",
+        errors,
+      });
+    }
+
+    const user = await User.findOne({
+      email: normalizedEmail,
+    }).select("+passwordHash");
+
+    if (!user) {
+      return response.status(401).json({
+        message: "Invalid email or password",
+      });
+    }
+
+    const passwordMatches = await bcrypt.compare(
+      password,
+      user.passwordHash,
+    );
+
+    if (!passwordMatches) {
+      return response.status(401).json({
+        message: "Invalid email or password",
+      });
+    }
+
+    const token = generateToken(user);
+
+    return response.status(200).json({
+      message: "Login successful",
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      },
+      token,
+    });
+  } catch (error) {
+    console.error("Unable to log in:");
+    console.error(error.message);
+
+    return response.status(500).json({
+      message: "Unable to log in",
+    });
+  }
+};
+
+export const getCurrentUser = async (
+  request,
+  response,
+) => {
+  return response.status(200).json({
+    user: {
+      id: request.user._id,
+      name: request.user.name,
+      email: request.user.email,
+      role: request.user.role,
+    },
+  });
 };

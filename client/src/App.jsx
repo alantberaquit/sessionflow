@@ -1,5 +1,9 @@
 import { Route, Routes } from "react-router";
 
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import PublicOnlyRoute from "./components/PublicOnlyRoute.jsx";
+import DashboardPage from "./pages/DashboardPage.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
 
 const App = () => {
@@ -27,10 +31,24 @@ const App = () => {
         }
       />
 
-      <Route
-        path="/register"
-        element={<RegisterPage />}
-      />
+      <Route element={<PublicOnlyRoute />}>
+        <Route
+          path="/register"
+          element={<RegisterPage />}
+        />
+
+        <Route
+          path="/login"
+          element={<LoginPage />}
+        />
+      </Route>
+
+      <Route element={<ProtectedRoute />}>
+        <Route
+          path="/dashboard"
+          element={<DashboardPage />}
+        />
+      </Route>
     </Routes>
   );
 };
