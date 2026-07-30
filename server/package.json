@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon --exec \"node --env-file=.env\" src/server.js",
-    "start": "node --env-file=.env src/server.js"
+    "start": "node --env-file=.env src/server.js",
+    "seed:event": "node --env-file=.env src/seeds/seedEvent.js"
   },
   "keywords": [
     "mern",

@@ -1,8 +1,14 @@
-import { Route, Routes } from "react-router";
+import {
+  Navigate,
+  Route,
+  Routes,
+} from "react-router";
 
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import PublicOnlyRoute from "./components/PublicOnlyRoute.jsx";
 import DashboardPage from "./pages/DashboardPage.jsx";
+import EventDetailsPage from "./pages/EventDetailsPage.jsx";
+import EventsPage from "./pages/EventsPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
@@ -13,23 +19,21 @@ const App = () => {
       <Route
         path="/"
         element={
-          <main className="grid min-h-screen place-items-center bg-slate-950 px-6 text-center text-white">
-            <div className="max-w-2xl">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-300">
-                Seminar and workshop registration
-              </p>
-
-              <h1 className="mt-4 text-5xl font-bold tracking-tight sm:text-7xl">
-                SessionFlow
-              </h1>
-
-              <p className="mt-6 text-lg leading-8 text-slate-300">
-                Manage your event registration and personalized
-                schedule in one place.
-              </p>
-            </div>
-          </main>
+          <Navigate
+            to="/events"
+            replace
+          />
         }
+      />
+
+      <Route
+        path="/events"
+        element={<EventsPage />}
+      />
+
+      <Route
+        path="/events/:slug"
+        element={<EventDetailsPage />}
       />
 
       <Route element={<PublicOnlyRoute />}>
@@ -55,6 +59,16 @@ const App = () => {
           element={<ProfilePage />}
         />
       </Route>
+
+      <Route
+        path="*"
+        element={
+          <Navigate
+            to="/events"
+            replace
+          />
+        }
+      />
     </Routes>
   );
 };
