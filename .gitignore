@@ -1,0 +1,19 @@
+# Dependencies
+**/node_modules/
+
+# Environment variables
+.env
+.env.*
+
+# Frontend build output
+**/dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# macOS files
+.DS_Store
+
+# VS Code settings
+.vscode/
