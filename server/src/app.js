@@ -2,6 +2,7 @@ import cors from "cors";
 import express from "express";
 
 import authRoutes from "./routes/authRoutes.js";
+import profileRoutes from "./routes/profileRoutes.js";
 
 const app = express();
 
@@ -28,5 +29,6 @@ app.get("/", (_request, response) => {
 });
 
 app.use("/api/auth", authRoutes);
+app.use("/api/profile", profileRoutes);
 
 export default app;
