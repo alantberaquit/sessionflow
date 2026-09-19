@@ -59,15 +59,23 @@ const createEvent = async () => {
 
     slug: EVENT_SLUG,
 
+    summary:
+      "A two-day summit for educators, instructional designers, trainers, and technology leaders exploring practical innovations in digital learning.",
+
     description:
       "A two-day professional learning summit for educators, instructional designers, trainers, and technology leaders exploring practical approaches to digital learning, artificial intelligence, accessibility, and learning experience design.",
 
-    startDate: new Date("2026-10-15T00:30:00.000Z"),
+    startDate: new Date(
+      "2026-10-15T00:30:00.000Z",
+    ),
 
-    endDate: new Date("2026-10-16T09:00:00.000Z"),
+    endDate: new Date(
+      "2026-10-16T09:00:00.000Z",
+    ),
 
     venue: {
-      name: "Metro Manila Learning Convention Center",
+      name:
+        "Metro Manila Learning Convention Center",
       address:
         "Innovation Avenue, Ortigas Center",
       city: "Pasig City",
@@ -82,6 +90,11 @@ const createEvent = async () => {
       closesAt: new Date(
         "2026-10-10T15:59:59.000Z",
       ),
+    },
+
+    registrationFee: {
+      amountInCentavos: 350000,
+      currency: "PHP",
     },
 
     capacity: 300,

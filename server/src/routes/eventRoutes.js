@@ -5,11 +5,18 @@ import {
   getPublishedEvents,
 } from "../controllers/eventController.js";
 import {
+  createOrGetParticipantPayment,
+  initiateParticipantBankTransfer,
+  selectParticipantPaymentMethod,
+  uploadParticipantPaymentProof,
+} from "../controllers/paymentController.js";
+import {
   getParticipantRegistration,
   saveRegistrationDraft,
   submitRegistration,
 } from "../controllers/registrationController.js";
 import authenticateUser from "../middleware/authenticateUser.js";
+import uploadPaymentProof from "../middleware/uploadPaymentProof.js";
 
 const router = express.Router();
 
@@ -30,6 +37,31 @@ router.post(
   "/:slug/registration/submit",
   authenticateUser,
   submitRegistration,
+);
+
+router.post(
+  "/:slug/payment",
+  authenticateUser,
+  createOrGetParticipantPayment,
+);
+
+router.patch(
+  "/:slug/payment/method",
+  authenticateUser,
+  selectParticipantPaymentMethod,
+);
+
+router.post(
+  "/:slug/payment/bank-transfer",
+  authenticateUser,
+  initiateParticipantBankTransfer,
+);
+
+router.post(
+  "/:slug/payment/proof",
+  authenticateUser,
+  uploadPaymentProof.single("receipt"),
+  uploadParticipantPaymentProof,
 );
 
 router.get(

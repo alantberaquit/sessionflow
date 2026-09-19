@@ -94,6 +94,8 @@ export const registerUser = async (request, response) => {
       role: "participant",
     });
 
+    const token = generateToken(user);
+
     return response.status(201).json({
       message:
         "Participant account created successfully",
@@ -103,6 +105,7 @@ export const registerUser = async (request, response) => {
         email: user.email,
         role: user.role,
       },
+      token,
     });
   } catch (error) {
     if (error?.code === 11000) {

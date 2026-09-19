@@ -11,7 +11,6 @@ import {
   LogIn,
   MapPin,
   Mic2,
-  Presentation,
   UsersRound,
 } from "lucide-react";
 import {
@@ -376,26 +375,43 @@ const EventDetailsPage = () => {
     );
 
   return (
-    <main className="min-h-screen bg-slate-100">
-      <header className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-blue-700 px-5 py-10 text-white sm:px-8 sm:py-14">
+    <main className="min-h-screen bg-[#f4f1ff]">
+      <header className="relative overflow-hidden bg-gradient-to-br from-[#f8f6ff] via-[#eee9ff] to-[#d9d1ff] px-5 pb-24 text-slate-950 sm:px-8 sm:pb-32">
         <div
-          className="pointer-events-none absolute -right-24 -top-28 h-80 w-80 rounded-full bg-white/10 blur-3xl"
+          className="pointer-events-none absolute -right-24 -top-28 h-[30rem] w-[30rem] rounded-full bg-blue-400/30 blur-3xl"
           aria-hidden="true"
         />
 
         <div className="relative mx-auto max-w-6xl">
+          <nav className="flex min-h-24 items-center justify-between gap-4" aria-label="Primary navigation">
+            <Link
+              className="inline-flex items-center gap-3 text-xl font-black tracking-[-0.04em] text-slate-950"
+              to="/events"
+            >
+              <span className="grid h-10 w-10 place-items-center rounded-full bg-blue-600 text-white">
+                <CalendarDays className="h-5 w-5" aria-hidden="true" />
+              </span>
+              <span>Conferia</span><span className="text-blue-600">.</span>
+            </Link>
+
+            <Link
+              className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-blue-200 bg-white/60 px-4 py-2 text-sm font-bold text-blue-800 transition hover:bg-white"
+              to={token ? "/dashboard" : "/login"}
+            >
+              {token ? "Dashboard" : "Sign in"}
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          </nav>
+
           <Link
-            className="inline-flex items-center gap-2 text-sm font-bold text-blue-200 transition hover:text-white"
+            className="mt-8 inline-flex items-center gap-2 text-sm font-bold text-blue-700 transition hover:text-blue-900"
             to="/events"
           >
-            <ArrowLeft
-              className="h-4 w-4"
-              aria-hidden="true"
-            />
-            Back to events
+            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+            All events
           </Link>
 
-          <div className="mt-10 max-w-4xl">
+          <div className="mt-8 max-w-5xl">
             <div
               className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm font-bold ${registrationDetails.classes}`}
             >
@@ -406,21 +422,21 @@ const EventDetailsPage = () => {
               {registrationDetails.label}
             </div>
 
-            <h1 className="mt-5 text-4xl font-bold tracking-[-0.05em] sm:text-5xl lg:text-6xl">
+            <h1 className="mt-6 text-4xl font-black leading-[1.02] tracking-[-0.06em] sm:text-6xl lg:text-7xl">
               {event.title}
             </h1>
 
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-blue-100">
+            <p className="mt-7 max-w-3xl text-lg leading-8 text-slate-600">
               {event.description}
             </p>
           </div>
         </div>
       </header>
 
-      <section className="mx-auto max-w-6xl px-5 py-10 sm:px-8 sm:py-14">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_20rem]">
+      <section className="relative mx-auto -mt-10 max-w-6xl px-5 pb-16 sm:-mt-14 sm:px-8 sm:pb-20">
+        <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_20rem]">
           <div className="grid gap-10">
-            <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-200/60 sm:p-8">
+            <section className="rounded-[2rem] border border-slate-200/80 bg-white p-6 shadow-[0_24px_70px_-36px_rgba(15,23,42,0.35)] sm:p-8">
               <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-600">
                 Event overview
               </p>
@@ -523,14 +539,18 @@ const EventDetailsPage = () => {
                 </p>
               </header>
 
-              <div className="mt-7 grid gap-5">
+              <div className="mt-7 grid gap-5 lg:grid-cols-3">
                 {event.plenarySessions.map(
-                  (session) => (
+                  (session, index) => (
                     <article
-                      className="rounded-3xl border border-slate-200 bg-white p-6 shadow-md shadow-slate-200/50 sm:p-7"
+                      className="group relative overflow-hidden rounded-[2rem] border border-blue-100 bg-white p-6 shadow-[0_20px_60px_-40px_rgba(69,39,159,0.55)] transition duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-200/30"
                       key={session.id}
                     >
-                      <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+                      <div className="absolute right-5 top-4 text-5xl font-black text-blue-100 transition group-hover:text-blue-200">
+                        {String(index + 1).padStart(2, "0")}
+                      </div>
+
+                      <div className="flex flex-col gap-5">
                         <div className="max-w-3xl">
                           <div className="flex items-center gap-2 text-sm font-bold text-blue-700">
                             <CheckCircle2
@@ -540,11 +560,11 @@ const EventDetailsPage = () => {
                             Required plenary
                           </div>
 
-                          <h3 className="mt-3 text-2xl font-bold tracking-tight text-slate-950">
+                          <h3 className="relative mt-4 min-h-20 pr-10 text-xl font-bold tracking-tight text-slate-950">
                             {session.title}
                           </h3>
 
-                          <p className="mt-3 leading-7 text-slate-600">
+                          <p className="mt-3 text-sm leading-6 text-slate-600">
                             {session.description}
                           </p>
                         </div>
@@ -566,7 +586,7 @@ const EventDetailsPage = () => {
                         </div>
                       </div>
 
-                      <div className="mt-6 grid gap-4 border-t border-slate-200 pt-5 sm:grid-cols-2">
+                      <div className="mt-6 grid gap-4 border-t border-slate-200 pt-5">
                         <div className="flex items-start gap-3">
                           <MapPin
                             className="mt-0.5 h-5 w-5 shrink-0 text-blue-600"
@@ -651,7 +671,7 @@ const EventDetailsPage = () => {
                 {event.breakoutBlocks.map(
                   (block) => (
                     <article
-                      className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-lg shadow-slate-200/50"
+                      className="overflow-hidden rounded-[2rem] border border-slate-200/80 bg-white shadow-[0_24px_70px_-42px_rgba(15,23,42,0.4)]"
                       key={block.id}
                     >
                       <header className="border-b border-slate-200 bg-slate-50 p-6 sm:p-7">
@@ -696,25 +716,20 @@ const EventDetailsPage = () => {
                         </div>
                       </header>
 
-                      <div className="grid gap-5 p-6 sm:p-7">
+                      <div className="grid gap-4 p-6 lg:grid-cols-3 sm:p-7">
                         {block.sessions.map(
                           (session) => (
                             <section
-                              className="rounded-2xl border border-slate-200 p-5 transition hover:border-blue-300 hover:shadow-md"
+                              className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 transition duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-100"
                               key={session.id}
                             >
-                              <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                              <div className="flex items-start justify-between gap-3">
                                 <div>
-                                  <div className="flex items-center gap-2 text-sm font-bold text-blue-700">
-                                    <Presentation
-                                      className="h-4 w-4"
-                                      aria-hidden="true"
-                                    />
-                                    Breakout option{" "}
-                                    {session.displayOrder}
+                                  <div className="grid h-10 w-10 place-items-center rounded-xl bg-blue-100 text-sm font-black text-blue-700">
+                                    {String(session.displayOrder).padStart(2, "0")}
                                   </div>
 
-                                  <h4 className="mt-2 text-xl font-bold text-slate-950">
+                                  <h4 className="mt-4 text-xl font-bold text-slate-950">
                                     {session.title}
                                   </h4>
                                 </div>
@@ -724,11 +739,11 @@ const EventDetailsPage = () => {
                                 </span>
                               </div>
 
-                              <p className="mt-3 leading-7 text-slate-600">
+                              <p className="mt-3 text-sm leading-6 text-slate-600">
                                 {session.description}
                               </p>
 
-                              <div className="mt-5 grid gap-4 border-t border-slate-200 pt-4 sm:grid-cols-3">
+                              <div className="mt-5 grid gap-4 border-t border-slate-200 pt-4">
                                 <div className="flex items-start gap-2">
                                   <MapPin
                                     className="mt-0.5 h-4 w-4 shrink-0 text-blue-600"
@@ -818,7 +833,7 @@ const EventDetailsPage = () => {
           </div>
 
           <aside className="grid content-start gap-6">
-            <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-200/60">
+            <section className="rounded-[2rem] border border-slate-200/80 bg-white p-6 shadow-[0_24px_70px_-36px_rgba(15,23,42,0.35)] xl:sticky xl:top-6">
               <p className="text-sm font-bold uppercase tracking-[0.16em] text-slate-500">
                 Registration
               </p>

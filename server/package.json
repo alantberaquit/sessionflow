@@ -6,8 +6,11 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon --exec \"node --env-file=.env\" src/server.js",
-    "start": "node --env-file=.env src/server.js",
+    "start": "node src/server.js",
     "seed:event": "node --env-file=.env src/seeds/seedEvent.js"
+  },
+  "engines": {
+    "node": ">=20.19.0"
   },
   "keywords": [
     "mern",
@@ -20,9 +23,12 @@
   "dependencies": {
     "bcrypt": "^6.0.0",
     "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
-    "mongoose": "^9.8.1"
+    "mongoose": "^9.8.1",
+    "multer": "^2.2.0",
+    "nodemailer": "^9.0.4"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"

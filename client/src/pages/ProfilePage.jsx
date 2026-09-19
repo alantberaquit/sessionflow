@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import {
   Link,
+  useLocation,
   useNavigate,
 } from "react-router";
 
@@ -45,7 +46,13 @@ const getInputClasses = (hasError) => {
 };
 
 const ProfilePage = () => {
+  const location = useLocation();
   const navigate = useNavigate();
+
+  const returnTo =
+    typeof location.state?.returnTo === "string"
+      ? location.state.returnTo
+      : null;
 
   const {
     token,
@@ -63,9 +70,17 @@ const ProfilePage = () => {
     useState(false);
   const [loadError, setLoadError] = useState("");
   const [statusMessage, setStatusMessage] =
-    useState("");
+    useState(
+      typeof location.state?.message === "string"
+        ? location.state.message
+        : "",
+    );
   const [statusType, setStatusType] =
-    useState("");
+    useState(
+      typeof location.state?.message === "string"
+        ? "success"
+        : "",
+    );
   const [isProfileComplete, setIsProfileComplete] =
     useState(false);
 
@@ -366,6 +381,16 @@ const ProfilePage = () => {
         responseData.message ||
           "Participant profile saved successfully.",
       );
+
+      if (returnTo) {
+        navigate(returnTo, {
+          replace: true,
+          state: {
+            message:
+              "Profile saved. You can now complete your event registration.",
+          },
+        });
+      }
     } catch (error) {
       console.error(
         "Unable to save participant profile:",
@@ -417,7 +442,7 @@ const ProfilePage = () => {
           </Link>
         </div>
 
-        <header className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-950 via-blue-950 to-blue-700 p-6 text-white shadow-xl sm:p-8 lg:p-10">
+        <header className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-800 via-blue-700 to-blue-500 p-6 text-white shadow-xl shadow-blue-300/20 sm:p-8 lg:p-10">
           <div
             className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-white/10 blur-3xl"
             aria-hidden="true"
@@ -757,7 +782,7 @@ const ProfilePage = () => {
               </p>
 
               <p className="mt-3 leading-7 text-blue-900">
-                After your profile is saved, SessionFlow will
+                After your profile is saved, Conferia will
                 guide you through event registration and
                 breakout-session selection.
               </p>

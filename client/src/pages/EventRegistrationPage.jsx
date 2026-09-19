@@ -500,9 +500,18 @@ const EventRegistrationPage = () => {
       setRegistration(
         submitResponseData.registration,
       );
-      setStatusType("success");
-      setStatusMessage(
-        submitResponseData.message,
+
+      navigate(
+        `/events/${encodeURIComponent(
+          slug,
+        )}/payment`,
+        {
+          replace: true,
+          state: {
+            message:
+              "Registration submitted successfully. Complete your payment to confirm your place.",
+          },
+        },
       );
     } catch (error) {
       console.error(
@@ -610,16 +619,16 @@ const EventRegistrationPage = () => {
   }
 
   return (
-    <main className="min-h-screen bg-slate-100">
-      <header className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-blue-700 px-5 py-10 text-white sm:px-8 sm:py-14">
+    <main className="min-h-screen bg-[#f4f1ff]">
+      <header className="relative overflow-hidden bg-gradient-to-br from-[#f8f6ff] via-[#eee9ff] to-[#d9d1ff] px-5 pb-20 text-slate-950 sm:px-8 sm:pb-24">
         <div
-          className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-white/10 blur-3xl"
+          className="pointer-events-none absolute -right-24 -top-24 h-[30rem] w-[30rem] rounded-full bg-blue-400/30 blur-3xl"
           aria-hidden="true"
         />
 
         <div className="relative mx-auto max-w-6xl">
           <Link
-            className="inline-flex items-center gap-2 text-sm font-bold text-blue-200 transition hover:text-white"
+            className="mt-8 inline-flex items-center gap-2 text-sm font-bold text-blue-700 transition hover:text-blue-900"
             to={`/events/${event.slug}`}
           >
             <ArrowLeft
@@ -629,28 +638,26 @@ const EventRegistrationPage = () => {
             Back to event details
           </Link>
 
-          <div className="mt-9 max-w-4xl">
-            <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-200">
+          <div className="mt-8 max-w-4xl">
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-700">
               Participant registration
             </p>
 
-            <h1 className="mt-4 text-4xl font-bold tracking-[-0.05em] sm:text-5xl">
-              Choose your breakout sessions
+            <h1 className="mt-4 text-4xl font-black tracking-[-0.055em] sm:text-5xl">
+              Build your event schedule
             </h1>
 
-            <p className="mt-5 max-w-3xl text-lg leading-8 text-blue-100">
-              Select one session from every breakout
-              block. Save your progress or submit the
-              completed registration.
+            <p className="mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
+              Your plenary program is included automatically. Choose one experience from every breakout block to complete your schedule.
             </p>
           </div>
         </div>
       </header>
 
-      <section className="mx-auto max-w-6xl px-5 py-10 sm:px-8 sm:py-14">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_20rem]">
+      <section className="relative mx-auto -mt-8 max-w-6xl px-5 pb-16 sm:-mt-10 sm:px-8 sm:pb-20">
+        <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_20rem]">
           <div>
-            <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-200/60 sm:p-8">
+            <section className="rounded-[2rem] border border-slate-200/80 bg-white p-6 shadow-[0_24px_70px_-36px_rgba(15,23,42,0.35)] sm:p-7">
               <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
                 <div>
                   <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-600">
@@ -662,25 +669,25 @@ const EventRegistrationPage = () => {
                   </h2>
                 </div>
 
-                <div className="flex items-center gap-3 rounded-2xl bg-slate-100 px-4 py-3">
+                <div className="flex min-w-0 max-w-full items-center gap-3 rounded-2xl bg-slate-100 px-4 py-3 sm:max-w-sm">
                   <UserRoundCheck
                     className="h-6 w-6 text-blue-600"
                     aria-hidden="true"
                   />
 
-                  <div>
+                  <div className="min-w-0">
                     <p className="text-sm font-bold text-slate-950">
                       {user.name}
                     </p>
 
-                    <p className="text-xs text-slate-600">
+                    <p className="truncate text-xs text-slate-600">
                       {user.email}
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-6 grid gap-4 border-t border-slate-200 pt-6 sm:grid-cols-2">
+              <div className="mt-5 grid gap-4 border-t border-slate-200 pt-5 sm:grid-cols-2">
                 <div className="flex items-start gap-3">
                   <CalendarDays
                     className="mt-0.5 h-5 w-5 shrink-0 text-blue-600"
@@ -719,6 +726,45 @@ const EventRegistrationPage = () => {
                 </div>
               </div>
             </section>
+
+            {event.plenarySessions?.length > 0 && (
+              <section className="mt-7 rounded-[2rem] border border-blue-200 bg-blue-50/70 p-6 sm:p-7">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+                  <div>
+                    <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-700">
+                      Included in your registration
+                    </p>
+                    <h2 className="mt-2 text-2xl font-black tracking-tight text-slate-950 sm:text-3xl">
+                      Plenary program
+                    </h2>
+                  </div>
+                  <span className="w-fit shrink-0 rounded-full bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-blue-800 shadow-sm">
+                    No selection required
+                  </span>
+                </div>
+
+                <div className="mt-6 grid gap-3 lg:grid-cols-3">
+                  {event.plenarySessions.map((session, index) => (
+                    <article
+                      className="grid gap-3 rounded-2xl border border-blue-100 bg-white p-4 shadow-sm"
+                      key={session.id}
+                    >
+                      <span className="grid h-11 w-11 place-items-center rounded-xl bg-blue-100 font-black text-blue-800">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <div>
+                        <h3 className="font-bold text-slate-950">{session.title}</h3>
+                        <p className="mt-1 text-sm text-slate-600">{session.room}</p>
+                      </div>
+                      <div className="border-t border-slate-100 pt-3 text-sm">
+                        <p className="font-bold text-slate-900">{formatScheduleDate(session.startsAt)}</p>
+                        <p className="mt-1 text-slate-600">{formatTime(session.startsAt)} – {formatTime(session.endsAt)}</p>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            )}
 
             {statusMessage && (
               <div
@@ -762,24 +808,25 @@ const EventRegistrationPage = () => {
                   </p>
 
                   <p className="mt-1 text-sm leading-6">
-                    Your breakout selections are locked
-                    while payment is pending.
+                    Your selections are saved. Continue to
+                    payment now, or manage your registration
+                    from the dashboard.
                   </p>
                 </div>
               </div>
             )}
 
-            <div className="mt-8 grid gap-8">
+            <div className="mt-10 grid gap-10">
               {event.breakoutBlocks.map((block) => {
                 const selectedSessionId =
                   selections[block.id];
 
                 return (
                   <article
-                    className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-lg shadow-slate-200/50"
+                    className="overflow-hidden rounded-[2rem] border border-slate-200/80 bg-white shadow-[0_24px_70px_-42px_rgba(15,23,42,0.4)]"
                     key={block.id}
                   >
-                    <header className="border-b border-slate-200 bg-slate-50 p-6 sm:p-7">
+                    <header className="border-b border-slate-200 bg-[#fbfaf8] p-6 sm:p-7">
                       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                         <div>
                           <p className="text-sm font-bold uppercase tracking-[0.16em] text-blue-600">
@@ -815,7 +862,7 @@ const EventRegistrationPage = () => {
                     </header>
 
                     <fieldset
-                      className="grid gap-4 p-6 sm:p-7"
+                      className="grid gap-3 p-6 sm:p-7"
                       disabled={isInteractionLocked}
                     >
                       <legend className="sr-only">
@@ -837,18 +884,18 @@ const EventRegistrationPage = () => {
 
                           return (
                             <label
-                              className={`block rounded-2xl border p-5 transition ${
+                              className={`relative flex rounded-2xl border p-4 transition duration-200 sm:p-5 ${
                                 isUnavailable
                                   ? "cursor-not-allowed border-slate-200 bg-slate-100 opacity-70"
                                   : isSelected
-                                    ? "cursor-pointer border-blue-600 bg-blue-50 ring-4 ring-blue-100"
+                                    ? "cursor-pointer border-blue-600 bg-blue-50 ring-4 ring-blue-100 shadow-md"
                                     : isSubmitted
                                       ? "cursor-not-allowed border-slate-200 bg-white opacity-70"
                                       : "cursor-pointer border-slate-200 bg-white hover:border-blue-300 hover:shadow-md"
                               }`}
                               key={session.id}
                             >
-                              <div className="flex items-start gap-4">
+                              <div className="flex w-full items-start gap-4">
                                 <input
                                   className="mt-1 h-5 w-5 shrink-0 accent-blue-600"
                                   type="radio"
@@ -868,9 +915,9 @@ const EventRegistrationPage = () => {
                                 />
 
                                 <div className="min-w-0 flex-1">
-                                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                                  <div className="flex items-start justify-between gap-3">
                                     <div>
-                                      <div className="flex items-center gap-2 text-sm font-bold text-blue-700">
+                                      <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-blue-700">
                                         <Presentation
                                           className="h-4 w-4"
                                           aria-hidden="true"
@@ -887,7 +934,7 @@ const EventRegistrationPage = () => {
                                     </div>
 
                                     <span
-                                      className={`w-fit rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide ${
+                                      className={`shrink-0 rounded-full px-2.5 py-1 text-[0.68rem] font-bold uppercase tracking-wide ${
                                         session.status ===
                                         "available"
                                           ? "bg-emerald-100 text-emerald-700"
@@ -898,11 +945,11 @@ const EventRegistrationPage = () => {
                                     </span>
                                   </div>
 
-                                  <p className="mt-3 leading-7 text-slate-600">
+                                  <p className="mt-2 text-sm leading-6 text-slate-600">
                                     {session.description}
                                   </p>
 
-                                  <div className="mt-5 grid gap-4 border-t border-slate-200 pt-4 sm:grid-cols-3">
+                                  <div className="mt-4 grid gap-3 border-t border-slate-200 pt-4 sm:grid-cols-3">
                                     <div className="flex items-start gap-2">
                                       <MapPin
                                         className="mt-0.5 h-4 w-4 text-blue-600"
@@ -928,7 +975,7 @@ const EventRegistrationPage = () => {
 
                                       <div>
                                         <p className="text-xs font-bold uppercase tracking-wide text-slate-500">
-                                          Capacity
+                                          Seats
                                         </p>
 
                                         <p className="mt-1 text-sm font-semibold text-slate-800">
@@ -941,8 +988,8 @@ const EventRegistrationPage = () => {
                                     </div>
 
                                     <div>
-                                      <p className="text-xs font-bold uppercase tracking-wide text-slate-500">
-                                        Speaker
+                                      <p className="text-[0.68rem] font-bold uppercase tracking-wide text-slate-500">
+                                        Led by
                                       </p>
 
                                       {session.speakers.map(
@@ -980,8 +1027,8 @@ const EventRegistrationPage = () => {
             </div>
           </div>
 
-          <aside className="grid content-start gap-6 lg:sticky lg:top-6 lg:self-start">
-            <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-200/60">
+          <aside className="grid content-start gap-6 xl:sticky xl:top-6 xl:self-start">
+            <section className="rounded-[2rem] border border-slate-200/80 bg-white p-6 shadow-[0_24px_70px_-36px_rgba(15,23,42,0.35)]">
               <p className="text-sm font-bold uppercase tracking-[0.16em] text-slate-500">
                 Registration progress
               </p>
@@ -1022,7 +1069,7 @@ const EventRegistrationPage = () => {
               {!isSubmitted && (
                 <>
                   <button
-                    className="mt-6 flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-blue-200 bg-blue-50 px-5 py-3 font-bold text-blue-700 transition hover:bg-blue-100 disabled:cursor-not-allowed disabled:opacity-70"
+                    className="mt-6 flex min-h-12 w-full items-center justify-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-5 py-3 font-bold text-blue-700 transition hover:bg-blue-100 disabled:cursor-not-allowed disabled:opacity-70"
                     type="button"
                     disabled={
                       isSaving || isSubmitting
@@ -1049,7 +1096,7 @@ const EventRegistrationPage = () => {
                   </button>
 
                   <button
-                    className="mt-3 flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 font-bold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
+                    className="mt-3 flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-blue-800 px-5 py-3 font-bold text-white shadow-lg shadow-blue-950/15 transition hover:bg-blue-900 disabled:cursor-not-allowed disabled:opacity-60"
                     type="button"
                     disabled={
                       !allBlocksSelected ||
@@ -1095,12 +1142,30 @@ const EventRegistrationPage = () => {
                       </p>
 
                       <p className="mt-1 text-sm leading-6 text-blue-800">
-                        Your registration has been
-                        submitted. Payment will be added
-                        in the next module.
+                        Your registration is ready for
+                        payment. Continue now to confirm
+                        your place.
                       </p>
                     </div>
                   </div>
+
+                  <button
+                    className="mt-4 flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-2 font-bold text-white transition hover:bg-blue-700"
+                    type="button"
+                    onClick={() =>
+                      navigate(
+                        `/events/${encodeURIComponent(
+                          slug,
+                        )}/payment`,
+                      )
+                    }
+                  >
+                    <CreditCard
+                      className="h-5 w-5"
+                      aria-hidden="true"
+                    />
+                    Continue to payment
+                  </button>
                 </div>
               )}
             </section>
@@ -1159,7 +1224,7 @@ const EventRegistrationPage = () => {
                     }`}
                   >
                     {isSubmitted
-                      ? "Your selections are locked while the registration awaits payment."
+                      ? "Your selections are saved. You can edit them from your dashboard while payment is pending."
                       : registration
                         ? "Your current choices are stored and will be restored when you return."
                         : "Select sessions and save your draft to keep your progress."}

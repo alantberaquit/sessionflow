@@ -10,7 +10,13 @@ import {
   UserRound,
   UserRoundPlus,
 } from "lucide-react";
-import { Link } from "react-router";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+} from "react-router";
+
+import useAuth from "../hooks/useAuth.js";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -35,6 +41,15 @@ const getInputClasses = (hasError) => {
 };
 
 const RegisterPage = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { startSession } = useAuth();
+
+  const returnTo =
+    typeof location.state?.from === "string"
+      ? location.state.from
+      : "/events";
+
   const [formData, setFormData] = useState(INITIAL_FORM_DATA);
   const [errors, setErrors] = useState({});
   const [statusMessage, setStatusMessage] = useState("");
@@ -213,11 +228,28 @@ const RegisterPage = () => {
         return;
       }
 
-      setFormData(INITIAL_FORM_DATA);
-      setStatusMessage(
-        responseData.message ||
-          "Participant account created successfully.",
+      if (
+        !responseData.token ||
+        !responseData.user
+      ) {
+        throw new Error(
+          "The registration response is incomplete",
+        );
+      }
+
+      startSession(
+        responseData.token,
+        responseData.user,
       );
+
+      navigate("/profile", {
+        replace: true,
+        state: {
+          returnTo,
+          message:
+            "Account created. Complete your profile to continue your registration.",
+        },
+      });
     } catch (error) {
       console.error("Registration request failed:");
       console.error(error.message);
@@ -232,7 +264,7 @@ const RegisterPage = () => {
 
   return (
     <main className="min-h-screen bg-slate-100 lg:grid lg:grid-cols-[1.05fr_0.95fr]">
-      <section className="relative flex min-h-[34rem] flex-col overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-blue-700 px-6 py-8 text-white sm:px-10 lg:min-h-screen lg:px-14 lg:py-10 xl:px-20">
+      <section className="relative flex min-h-[34rem] flex-col overflow-hidden bg-gradient-to-br from-blue-800 via-blue-700 to-blue-500 px-6 py-8 text-white sm:px-10 lg:min-h-screen lg:px-14 lg:py-10 xl:px-20">
         <div
           className="pointer-events-none absolute -left-28 -top-28 h-80 w-80 rounded-full bg-white/10 blur-3xl"
           aria-hidden="true"
@@ -243,15 +275,19 @@ const RegisterPage = () => {
           aria-hidden="true"
         />
 
-        <div className="relative z-10 flex items-center gap-3">
+        <Link
+          className="relative z-10 flex w-fit items-center gap-3 rounded-xl focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-blue-300"
+          to="/events"
+          aria-label="Conferia events"
+        >
           <div className="grid h-11 w-11 place-items-center rounded-2xl border border-white/20 bg-white/10 text-lg font-black shadow-lg shadow-slate-950/20">
             S
           </div>
 
           <span className="text-lg font-bold tracking-tight">
-            SessionFlow
+            Conferia<span className="text-teal-300">.</span>
           </span>
-        </div>
+        </Link>
 
         <div className="relative z-10 my-auto max-w-2xl py-16 lg:py-12">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-200 sm:text-sm">
@@ -602,6 +638,7 @@ const RegisterPage = () => {
             <Link
               className="font-bold text-blue-700 hover:text-blue-800 hover:underline"
               to="/login"
+              state={{ from: returnTo }}
             >
               Sign in
             </Link>

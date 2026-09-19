@@ -1,1 +1,63 @@
 @import "tailwindcss";
+
+/*
+ * Conferia's screens use Tailwind's blue utility scale as their
+ * primary brand token. Remap that shared scale here so every existing flow
+ * adopts the teal identity consistently, including focus rings and subtle
+ * status surfaces that are easy to miss in page-by-page edits.
+ */
+@theme {
+  --color-blue-50: #f7f5ff;
+  --color-blue-100: #eeeaff;
+  --color-blue-200: #ddd5ff;
+  --color-blue-300: #c4b5fd;
+  --color-blue-400: #9b87f5;
+  --color-blue-500: #7c5cf0;
+  --color-blue-600: #6941e8;
+  --color-blue-700: #5730c8;
+  --color-blue-800: #45279f;
+  --color-blue-900: #342075;
+  --color-blue-950: #1e1346;
+
+  --color-teal-50: #f7f5ff;
+  --color-teal-100: #eeeaff;
+  --color-teal-200: #ddd5ff;
+  --color-teal-300: #b8a7ff;
+  --color-teal-400: #9b87f5;
+  --color-teal-500: #7c5cf0;
+  --color-teal-600: #6941e8;
+  --color-teal-700: #5730c8;
+  --color-teal-800: #45279f;
+  --color-teal-900: #342075;
+  --color-teal-950: #1e1346;
+
+  --color-slate-50: #fbfaff;
+  --color-slate-100: #f4f1ff;
+  --color-slate-200: #e7e2f3;
+  --color-slate-300: #d3cce4;
+}
+
+:root {
+  color: #0f172a;
+  background: #f4f1ff;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}

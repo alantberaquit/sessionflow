@@ -65,21 +65,22 @@ const eventRegistrationSchema = new mongoose.Schema(
       index: true,
     },
 
-    paymentStatus: {
-      type: String,
-      enum: {
-        values: [
-          "not-required",
-          "pending",
-          "paid",
-          "failed",
-          "refunded",
-        ],
-        message:
-          "{VALUE} is not a supported payment status",
-      },
-      default: "pending",
-    },
+paymentStatus: {
+  type: String,
+  enum: {
+    values: [
+      "not-required",
+      "pending",
+      "paid",
+      "failed",
+      "cancelled",
+      "refunded",
+    ],
+    message:
+      "{VALUE} is not a supported payment status",
+  },
+  default: "pending",
+},
 
     submittedAt: {
       type: Date,
