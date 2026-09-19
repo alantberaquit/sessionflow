@@ -12,10 +12,12 @@ const currentDirectory = path.dirname(
   currentFilePath,
 );
 
-const uploadDirectory = path.resolve(
-  currentDirectory,
-  "../../uploads/payment-proofs",
-);
+const uploadDirectory = process.env.VERCEL
+  ? path.join("/tmp", "payment-proofs")
+  : path.resolve(
+      currentDirectory,
+      "../../uploads/payment-proofs",
+    );
 
 fs.mkdirSync(uploadDirectory, {
   recursive: true,

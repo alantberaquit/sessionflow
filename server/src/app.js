@@ -1,6 +1,7 @@
 import cors from "cors";
 import express from "express";
 
+import connectDatabase from "./config/database.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import eventRoutes from "./routes/eventRoutes.js";
@@ -26,8 +27,33 @@ app.use(express.json());
 
 app.get("/", (_request, response) => {
   response.status(200).json({
-    message: "SessionFlow API is running",
+    message: "Conferia API is running",
   });
+});
+
+/*
+ * Vercel imports this Express app without running server.js. Cache the
+ * connection promise so warm serverless invocations reuse one MongoDB
+ * connection while local development can still connect before listening.
+ */
+let databaseConnectionPromise;
+
+app.use(async (_request, _response, next) => {
+  if (!databaseConnectionPromise) {
+    databaseConnectionPromise = connectDatabase().catch(
+      (error) => {
+        databaseConnectionPromise = undefined;
+        throw error;
+      },
+    );
+  }
+
+  try {
+    await databaseConnectionPromise;
+    next();
+  } catch (error) {
+    next(error);
+  }
 });
 
 app.use("/api/admin", adminRoutes);
