@@ -10,6 +10,7 @@ import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import AdminLayout from "./layouts/AdminLayout.jsx";
 
 import AdminPaymentReviewsPage from "./pages/AdminPaymentReviewsPage.jsx";
+import AdminEventsPage from "./pages/AdminEventsPage.jsx";
 import AdminRefundHistoryPage from "./pages/AdminRefundHistoryPage.jsx";
 import AdminRefundsPage from "./pages/AdminRefundsPage.jsx";
 import DashboardPage from "./pages/DashboardPage.jsx";
@@ -88,6 +89,11 @@ const App = () => {
 
       <Route element={<AdminRoute />}>
         <Route element={<AdminLayout />}>
+          <Route
+            path="/admin/events"
+            element={<AdminEventsPage />}
+          />
+
           <Route
             path="/admin/payments"
             element={

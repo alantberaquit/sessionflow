@@ -1,5 +1,6 @@
 import {
   CalendarDays,
+  CalendarRange,
   CircleUserRound,
   ClipboardCheck,
   History,
@@ -120,6 +121,15 @@ const AdminLayout = () => {
           </p>
 
           <div className="mt-3 space-y-1">
+            <NavLink
+              to="/admin/events"
+              onClick={closeSidebar}
+              className={getNavLinkClasses}
+            >
+              <CalendarRange className="h-5 w-5 shrink-0" aria-hidden="true" />
+              Events and sessions
+            </NavLink>
+
             <NavLink
               to="/dashboard"
               onClick={closeSidebar}
