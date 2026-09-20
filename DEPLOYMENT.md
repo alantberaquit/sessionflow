@@ -47,6 +47,8 @@ In the `conferia-api` project, replace the temporary `CLIENT_URL` with the exact
 
 Open `/events`, create a new portfolio account, complete the profile and registration flow, and refresh `/dashboard` to confirm client-side routes work. Check the browser console for CORS errors.
 
+The repository [README](./README.md) contains the shared participant and administrator demo credentials used for portfolio evaluation. Keep those accounts limited to fictional demonstration data.
+
 ## Free-tier limitation
 
 MongoDB records persist in Atlas, but uploaded payment receipts are stored in Vercel's temporary filesystem and may disappear between serverless invocations or deployments. The manual-payment upload is suitable only as a UI demonstration until it is connected to persistent object storage such as Vercel Blob or Cloudinary.
