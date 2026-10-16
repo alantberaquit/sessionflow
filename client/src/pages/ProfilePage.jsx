@@ -442,7 +442,7 @@ const ProfilePage = () => {
           </Link>
         </div>
 
-        <header className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-800 via-blue-700 to-blue-500 p-6 text-white shadow-xl shadow-blue-300/20 sm:p-8 lg:p-10">
+        <header className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-800 via-blue-700 to-blue-500 p-6 text-white shadow-xl shadow-blue-300/20 sm:p-8 lg:p-10">
           <div
             className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-white/10 blur-3xl"
             aria-hidden="true"
@@ -482,7 +482,7 @@ const ProfilePage = () => {
         </header>
 
         <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_20rem]">
-          <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-200/60 sm:p-8">
+          <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-200/60 sm:p-8">
             <header>
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-600">
                 Profile information
@@ -738,7 +738,7 @@ const ProfilePage = () => {
           </section>
 
           <aside className="grid content-start gap-6">
-            <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-200/60">
+            <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-200/60">
               <div
                 className={`grid h-11 w-11 place-items-center rounded-2xl ${
                   isProfileComplete
@@ -776,7 +776,7 @@ const ProfilePage = () => {
               </p>
             </article>
 
-            <article className="rounded-3xl border border-blue-200 bg-blue-50 p-6">
+            <article className="rounded-2xl border border-blue-200 bg-blue-50 p-6">
               <p className="text-sm font-bold uppercase tracking-[0.16em] text-blue-700">
                 What comes next
               </p>

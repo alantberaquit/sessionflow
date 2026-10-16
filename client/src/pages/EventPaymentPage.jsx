@@ -636,7 +636,7 @@ const EventPaymentPage = () => {
     return (
       <main className="grid min-h-screen place-items-center bg-slate-50 px-5 py-12">
         <section
-          className="w-full max-w-xl rounded-3xl border border-slate-200 bg-white p-8 text-center shadow-lg shadow-slate-200/50 sm:p-10"
+          className="w-full max-w-xl rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-lg shadow-slate-200/50 sm:p-10"
           role="alert"
         >
           <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-red-100 text-red-700">
@@ -759,7 +759,7 @@ const EventPaymentPage = () => {
             </p>
           </div>
 
-          <section className="mt-8 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-lg shadow-slate-200/50">
+          <section className="mt-8 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg shadow-slate-200/50">
             <header className="border-b border-slate-200 p-6 sm:p-8">
               <div className="flex items-start gap-4">
                 <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-blue-100 text-blue-700">
@@ -861,7 +861,7 @@ const EventPaymentPage = () => {
           </section>
 
           {!isPaid && (
-            <section className="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-200/40 sm:p-8">
+            <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-200/40 sm:p-8">
               <div>
                 <p className="text-sm font-bold uppercase tracking-[0.14em] text-blue-600">
                   Payment method
@@ -1075,7 +1075,7 @@ const EventPaymentPage = () => {
           )}
 
           {bankTransfer && !isPaid && (
-            <section className="mt-8 overflow-hidden rounded-3xl border border-blue-200 bg-white shadow-lg shadow-blue-100/50">
+            <section className="mt-8 overflow-hidden rounded-2xl border border-blue-200 bg-white shadow-lg shadow-blue-100/50">
               <header className="border-b border-blue-100 bg-blue-50 p-6 sm:p-8">
                 <div className="flex items-start gap-4">
                   <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-blue-600 text-white">
@@ -1217,7 +1217,7 @@ const EventPaymentPage = () => {
           )}
 
           {canUploadProof && (
-            <section className="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-200/40 sm:p-8">
+            <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-200/40 sm:p-8">
               <div className="flex items-start gap-4">
                 <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-violet-100 text-violet-700">
                   <Upload
@@ -1462,7 +1462,7 @@ const EventPaymentPage = () => {
           )}
 
           {isPaid && (
-            <section className="mt-8 flex items-start gap-3 rounded-3xl border border-emerald-200 bg-emerald-50 p-6 text-emerald-800">
+            <section className="mt-8 flex items-start gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 p-6 text-emerald-800">
               <CheckCircle2
                 className="mt-0.5 h-6 w-6 shrink-0"
                 aria-hidden="true"

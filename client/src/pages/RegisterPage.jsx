@@ -280,8 +280,8 @@ const RegisterPage = () => {
           to="/events"
           aria-label="Conferia events"
         >
-          <div className="grid h-11 w-11 place-items-center rounded-2xl border border-white/20 bg-white/10 text-lg font-black shadow-lg shadow-slate-950/20">
-            S
+          <div className="grid h-11 w-11 place-items-center rounded-xl bg-blue-600 text-white shadow-lg shadow-blue-950/25">
+            <CalendarDays className="h-5 w-5" aria-hidden="true" />
           </div>
 
           <span className="text-lg font-bold tracking-tight">
@@ -291,7 +291,7 @@ const RegisterPage = () => {
 
         <div className="relative z-10 my-auto max-w-2xl py-16 lg:py-12">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-200 sm:text-sm">
-            Digital Learning &amp; Innovation Summit 2026
+            Digital Learning &amp; Innovation Summit 2027
           </p>
 
           <h1 className="mt-5 max-w-[10ch] text-5xl font-bold leading-[0.98] tracking-[-0.055em] sm:text-6xl xl:text-7xl">
@@ -354,7 +354,7 @@ const RegisterPage = () => {
       </section>
 
       <section className="grid min-h-screen place-items-center px-5 py-12 sm:px-8 lg:px-10 xl:px-16">
-        <div className="w-full max-w-xl rounded-3xl border border-slate-200 bg-white p-6 shadow-2xl shadow-slate-300/40 sm:p-9 xl:p-11">
+        <div className="w-full max-w-xl rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl shadow-slate-300/40 sm:p-9 xl:p-11">
           <header>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-600">
               Participant registration

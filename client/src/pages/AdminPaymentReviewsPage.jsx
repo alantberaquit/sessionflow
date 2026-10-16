@@ -567,7 +567,7 @@ const AdminPaymentReviewsPage = () => {
 
         {!errorMessage &&
           payments.length === 0 && (
-            <section className="mt-8 rounded-3xl border border-slate-200 bg-white p-10 text-center shadow-sm">
+            <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-10 text-center shadow-sm">
               <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-emerald-100 text-emerald-700">
                 <SearchCheck
                   className="h-7 w-7"
@@ -663,7 +663,7 @@ const AdminPaymentReviewsPage = () => {
               </aside>
 
               {selectedPayment && (
-                <section className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+                <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
                   <header className="border-b border-slate-200 p-6 sm:p-8">
                     <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
                       <div>

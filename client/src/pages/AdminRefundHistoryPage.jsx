@@ -189,7 +189,7 @@ const AdminRefundHistoryPage = () => {
   return (
     <main className="min-h-screen bg-slate-100 px-5 py-10 sm:px-8">
       <section className="mx-auto max-w-7xl">
-        <header className="rounded-3xl bg-gradient-to-br from-blue-800 to-blue-600 p-6 text-white shadow-xl shadow-blue-300/20 sm:p-8">
+        <header className="rounded-2xl bg-gradient-to-br from-blue-800 to-blue-600 p-6 text-white shadow-xl shadow-blue-300/20 sm:p-8">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-300">
@@ -313,7 +313,7 @@ const AdminRefundHistoryPage = () => {
         </section>
 
         {isLoading && (
-          <div className="mt-6 flex min-h-64 items-center justify-center rounded-3xl border border-slate-200 bg-white shadow-sm">
+          <div className="mt-6 flex min-h-64 items-center justify-center rounded-2xl border border-slate-200 bg-white shadow-sm">
             <div className="flex items-center gap-3 text-slate-700">
               <LoaderCircle
                 className="h-6 w-6 animate-spin"
@@ -329,7 +329,7 @@ const AdminRefundHistoryPage = () => {
 
         {!isLoading && errorMessage && (
           <div
-            className="mt-6 rounded-3xl border border-red-200 bg-red-50 p-6 text-red-700 shadow-sm"
+            className="mt-6 rounded-2xl border border-red-200 bg-red-50 p-6 text-red-700 shadow-sm"
             role="alert"
           >
             <div className="flex items-start gap-3">
@@ -366,7 +366,7 @@ const AdminRefundHistoryPage = () => {
         {!isLoading &&
           !errorMessage &&
           registrations.length === 0 && (
-            <div className="mt-6 rounded-3xl border border-slate-200 bg-white p-10 text-center shadow-sm">
+            <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-10 text-center shadow-sm">
               <RotateCcw
                 className="mx-auto h-12 w-12 text-slate-400"
                 aria-hidden="true"
@@ -401,7 +401,7 @@ const AdminRefundHistoryPage = () => {
             <div className="mt-6 space-y-6">
               {registrations.map((item) => (
                 <article
-                  className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-lg shadow-slate-200/50"
+                  className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg shadow-slate-200/50"
                   key={
                     item.payment?.id ||
                     item.registration?.id

@@ -3,7 +3,7 @@
 /*
  * Conferia's screens use Tailwind's blue utility scale as their
  * primary brand token. Remap that shared scale here so every existing flow
- * adopts the teal identity consistently, including focus rings and subtle
+ * adopts the violet identity consistently, including focus rings and subtle
  * status surfaces that are easy to miss in page-by-page edits.
  */
 @theme {
@@ -52,6 +52,19 @@ body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
+}
+
+.event-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 76px 76px;
+  mask-image: linear-gradient(to bottom, black, transparent 88%);
+}
+
+::selection {
+  color: #1e1346;
+  background: #ddd5ff;
 }
 
 button,

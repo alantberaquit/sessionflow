@@ -551,7 +551,7 @@ const EventRegistrationPage = () => {
   if (isNotFound) {
     return (
       <main className="grid min-h-screen place-items-center bg-slate-100 px-5 py-12">
-        <section className="w-full max-w-xl rounded-3xl border border-slate-200 bg-white p-8 text-center shadow-xl shadow-slate-200/60 sm:p-10">
+        <section className="w-full max-w-xl rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-xl shadow-slate-200/60 sm:p-10">
           <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-amber-100 text-amber-700">
             <AlertCircle
               className="h-7 w-7"
@@ -587,7 +587,7 @@ const EventRegistrationPage = () => {
     return (
       <main className="grid min-h-screen place-items-center bg-slate-100 px-5 py-12">
         <section
-          className="w-full max-w-xl rounded-3xl border border-red-200 bg-red-50 p-8 text-center sm:p-10"
+          className="w-full max-w-xl rounded-2xl border border-red-200 bg-red-50 p-8 text-center sm:p-10"
           role="alert"
         >
           <AlertCircle
@@ -657,7 +657,7 @@ const EventRegistrationPage = () => {
       <section className="relative mx-auto -mt-8 max-w-6xl px-5 pb-16 sm:-mt-10 sm:px-8 sm:pb-20">
         <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_20rem]">
           <div>
-            <section className="rounded-[2rem] border border-slate-200/80 bg-white p-6 shadow-[0_24px_70px_-36px_rgba(15,23,42,0.35)] sm:p-7">
+            <section className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[0_24px_70px_-36px_rgba(15,23,42,0.35)] sm:p-7">
               <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
                 <div>
                   <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-600">
@@ -728,7 +728,7 @@ const EventRegistrationPage = () => {
             </section>
 
             {event.plenarySessions?.length > 0 && (
-              <section className="mt-7 rounded-[2rem] border border-blue-200 bg-blue-50/70 p-6 sm:p-7">
+              <section className="mt-7 rounded-2xl border border-blue-200 bg-blue-50/70 p-6 sm:p-7">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                   <div>
                     <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-700">
@@ -823,7 +823,7 @@ const EventRegistrationPage = () => {
 
                 return (
                   <article
-                    className="overflow-hidden rounded-[2rem] border border-slate-200/80 bg-white shadow-[0_24px_70px_-42px_rgba(15,23,42,0.4)]"
+                    className="overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-[0_24px_70px_-42px_rgba(15,23,42,0.4)]"
                     key={block.id}
                   >
                     <header className="border-b border-slate-200 bg-[#fbfaf8] p-6 sm:p-7">
@@ -1028,7 +1028,7 @@ const EventRegistrationPage = () => {
           </div>
 
           <aside className="grid content-start gap-6 xl:sticky xl:top-6 xl:self-start">
-            <section className="rounded-[2rem] border border-slate-200/80 bg-white p-6 shadow-[0_24px_70px_-36px_rgba(15,23,42,0.35)]">
+            <section className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[0_24px_70px_-36px_rgba(15,23,42,0.35)]">
               <p className="text-sm font-bold uppercase tracking-[0.16em] text-slate-500">
                 Registration progress
               </p>
@@ -1171,7 +1171,7 @@ const EventRegistrationPage = () => {
             </section>
 
             <section
-              className={`rounded-3xl border p-6 ${
+              className={`rounded-2xl border p-6 ${
                 isSubmitted
                   ? "border-blue-200 bg-blue-50"
                   : registration

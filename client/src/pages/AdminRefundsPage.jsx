@@ -625,7 +625,7 @@ const AdminRefundsPage = () => {
       )}
 
       {isLoading ? (
-        <section className="grid min-h-64 place-items-center rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+        <section className="grid min-h-64 place-items-center rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
           <div
             className="text-center"
             role="status"
@@ -641,7 +641,7 @@ const AdminRefundsPage = () => {
           </div>
         </section>
       ) : registrations.length === 0 ? (
-        <section className="grid min-h-64 place-items-center rounded-3xl border border-slate-200 bg-white p-8 text-center shadow-sm">
+        <section className="grid min-h-64 place-items-center rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm">
           <div className="max-w-xl">
             <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-blue-100 text-blue-600">
               <RotateCcw
@@ -677,7 +677,7 @@ const AdminRefundsPage = () => {
         </section>
       ) : (
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(360px,0.8fr)]">
-          <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+          <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
             <div className="mb-5">
               <h2 className="text-xl font-black text-slate-950">
                 Paid registrations
@@ -828,7 +828,7 @@ const AdminRefundsPage = () => {
             {selectedRecord ? (
               <form
                 onSubmit={handleSubmitRefund}
-                className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6"
+                className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div>
@@ -1075,7 +1075,7 @@ const AdminRefundsPage = () => {
                 </button>
               </form>
             ) : (
-              <section className="rounded-3xl border border-dashed border-slate-300 bg-white p-8 text-center shadow-sm">
+              <section className="rounded-2xl border border-dashed border-slate-300 bg-white p-8 text-center shadow-sm">
                 <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-slate-100 text-slate-500">
                   <ReceiptText
                     className="h-6 w-6"

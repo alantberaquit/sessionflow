@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "nodemon --exec \"node --env-file=.env\" src/server.js",
     "start": "node src/server.js",
-    "seed:event": "node --env-file=.env src/seeds/seedEvent.js"
+    "seed:event": "node --env-file=.env src/seeds/seedEvent.js",
+    "migrate:event-2027": "node --env-file=.env src/scripts/migrateEventTo2027.js"
   },
   "engines": {
     "node": ">=20.19.0"

@@ -509,8 +509,8 @@ const DashboardPage = () => {
       <section className="mx-auto grid max-w-[90rem] gap-5 md:grid-cols-[15rem_minmax(0,1fr)] xl:grid-cols-[17rem_minmax(0,1fr)]">
         <aside className="flex flex-col overflow-hidden rounded-[1.75rem] bg-gradient-to-b from-blue-700 to-blue-900 text-white shadow-xl shadow-blue-950/15 md:sticky md:top-6 md:h-[calc(100vh-3rem)]">
           <div className="flex items-center gap-3 border-b border-white/10 px-5 py-6">
-            <div className="grid h-11 w-11 place-items-center rounded-2xl bg-white text-lg font-black text-teal-800 shadow-sm">
-              S
+            <div className="grid h-11 w-11 place-items-center rounded-xl bg-white text-blue-700 shadow-sm">
+              <CalendarDays className="h-5 w-5" aria-hidden="true" />
             </div>
 
             <div>
@@ -807,7 +807,7 @@ const DashboardPage = () => {
 
           {isLoading && (
             <div
-              className="mt-6 flex items-center justify-center gap-3 rounded-3xl border border-slate-200 bg-white p-10 text-slate-600"
+              className="mt-6 flex items-center justify-center gap-3 rounded-2xl border border-slate-200 bg-white p-10 text-slate-600"
               role="status"
             >
               <LoaderCircle
@@ -846,7 +846,7 @@ const DashboardPage = () => {
           {!isLoading &&
             !errorMessage &&
             registrations.length === 0 && (
-              <div className="mt-6 rounded-3xl border border-slate-200 bg-white p-10 text-center shadow-sm">
+              <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-10 text-center shadow-sm">
                 <CalendarDays
                   className="mx-auto h-12 w-12 text-slate-400"
                   aria-hidden="true"
@@ -899,7 +899,7 @@ const DashboardPage = () => {
                     return (
                       <article
                         key={registration.id}
-                        className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-lg shadow-slate-200/60"
+                        className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg shadow-slate-200/60"
                       >
                         <div className="border-b border-slate-200 p-6 sm:p-8">
                           <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
@@ -1268,7 +1268,7 @@ const DashboardPage = () => {
           }}
         >
           <section
-            className="w-full max-w-lg rounded-3xl bg-white p-6 shadow-2xl sm:p-8"
+            className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-2xl sm:p-8"
             role="dialog"
             aria-modal="true"
             aria-labelledby="cancel-registration-title"

@@ -6,7 +6,7 @@ import Event from "../models/Event.js";
 import PlenarySession from "../models/PlenarySession.js";
 
 const EVENT_SLUG =
-  "digital-learning-innovation-summit-2026";
+  "digital-learning-innovation-summit-2027";
 
 const connectToDatabase = async () => {
   const mongoDbUri = process.env.MONGODB_URI;
@@ -55,7 +55,7 @@ const removeExistingSampleEvent = async () => {
 const createEvent = async () => {
   const event = await Event.create({
     title:
-      "Digital Learning & Innovation Summit 2026",
+      "Digital Learning & Innovation Summit 2027",
 
     slug: EVENT_SLUG,
 
@@ -66,11 +66,11 @@ const createEvent = async () => {
       "A two-day professional learning summit for educators, instructional designers, trainers, and technology leaders exploring practical approaches to digital learning, artificial intelligence, accessibility, and learning experience design.",
 
     startDate: new Date(
-      "2026-10-15T00:30:00.000Z",
+      "2027-10-14T00:30:00.000Z",
     ),
 
     endDate: new Date(
-      "2026-10-16T09:00:00.000Z",
+      "2027-10-15T09:00:00.000Z",
     ),
 
     venue: {
@@ -84,11 +84,11 @@ const createEvent = async () => {
 
     registrationPeriod: {
       opensAt: new Date(
-        "2026-08-01T00:00:00.000Z",
+        "2026-10-01T00:00:00.000Z",
       ),
 
       closesAt: new Date(
-        "2026-10-10T15:59:59.000Z",
+        "2027-10-10T15:59:59.000Z",
       ),
     },
 
@@ -121,11 +121,11 @@ const createPlenarySessions = async (eventId) => {
         "The summit opens with an overview of emerging opportunities, challenges, and practical priorities shaping the future of technology-enabled education.",
 
       startsAt: new Date(
-        "2026-10-15T00:30:00.000Z",
+        "2027-10-14T00:30:00.000Z",
       ),
 
       endsAt: new Date(
-        "2026-10-15T02:00:00.000Z",
+        "2027-10-14T02:00:00.000Z",
       ),
 
       room: "Grand Ballroom",
@@ -157,11 +157,11 @@ const createPlenarySessions = async (eventId) => {
         "A keynote discussion on adopting artificial intelligence responsibly while protecting learner privacy, academic integrity, accessibility, and human-centered teaching.",
 
       startsAt: new Date(
-        "2026-10-16T00:30:00.000Z",
+        "2027-10-15T00:30:00.000Z",
       ),
 
       endsAt: new Date(
-        "2026-10-16T02:00:00.000Z",
+        "2027-10-15T02:00:00.000Z",
       ),
 
       room: "Grand Ballroom",
@@ -193,11 +193,11 @@ const createPlenarySessions = async (eventId) => {
         "Participants reflect on key lessons from the summit and identify practical commitments they can apply within their schools, organizations, and learning programs.",
 
       startsAt: new Date(
-        "2026-10-16T07:30:00.000Z",
+        "2027-10-15T07:30:00.000Z",
       ),
 
       endsAt: new Date(
-        "2026-10-16T09:00:00.000Z",
+        "2027-10-15T09:00:00.000Z",
       ),
 
       room: "Grand Ballroom",
@@ -239,11 +239,11 @@ const createBreakoutBlocks = async (eventId) => {
           "Choose one morning session focused on practical digital-learning foundations.",
 
         startsAt: new Date(
-          "2026-10-15T02:30:00.000Z",
+          "2027-10-14T02:30:00.000Z",
         ),
 
         endsAt: new Date(
-          "2026-10-15T04:00:00.000Z",
+          "2027-10-14T04:00:00.000Z",
         ),
 
         displayOrder: 1,
@@ -264,11 +264,11 @@ const createBreakoutBlocks = async (eventId) => {
           "Choose one afternoon session focused on content creation and learning delivery.",
 
         startsAt: new Date(
-          "2026-10-15T05:30:00.000Z",
+          "2027-10-14T05:30:00.000Z",
         ),
 
         endsAt: new Date(
-          "2026-10-15T07:00:00.000Z",
+          "2027-10-14T07:00:00.000Z",
         ),
 
         displayOrder: 2,
@@ -289,11 +289,11 @@ const createBreakoutBlocks = async (eventId) => {
           "Choose one morning session focused on artificial intelligence and emerging technologies.",
 
         startsAt: new Date(
-          "2026-10-16T02:30:00.000Z",
+          "2027-10-15T02:30:00.000Z",
         ),
 
         endsAt: new Date(
-          "2026-10-16T04:00:00.000Z",
+          "2027-10-15T04:00:00.000Z",
         ),
 
         displayOrder: 3,
@@ -314,11 +314,11 @@ const createBreakoutBlocks = async (eventId) => {
           "Choose one afternoon session focused on implementation, evaluation, and organizational change.",
 
         startsAt: new Date(
-          "2026-10-16T05:30:00.000Z",
+          "2027-10-15T05:30:00.000Z",
         ),
 
         endsAt: new Date(
-          "2026-10-16T07:00:00.000Z",
+          "2027-10-15T07:00:00.000Z",
         ),
 
         displayOrder: 4,

@@ -79,9 +79,12 @@ const AdminLayout = () => {
           <NavLink
             to="/dashboard"
             onClick={closeSidebar}
-            className="text-xl font-black tracking-tight text-white"
+            className="flex items-center gap-3 text-xl font-black tracking-tight text-white"
           >
-            Conferia<span className="text-teal-300">.</span>
+            <span className="grid h-10 w-10 place-items-center rounded-xl bg-blue-600 text-white shadow-lg shadow-blue-950/25">
+              <CalendarDays className="h-5 w-5" aria-hidden="true" />
+            </span>
+            <span>Conferia<span className="text-teal-300">.</span></span>
           </NavLink>
 
           <button
